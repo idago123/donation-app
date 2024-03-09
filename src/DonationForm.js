@@ -97,8 +97,8 @@ const DonationForm = () => {
     return (
         <>
             <div>
-                <h1>Thank you for your support!</h1>
-                <p>Your donation is greatly appreciated.</p>
+                <h1>Welcome to Anna's Animal Shelter Portal!</h1>
+                <p>Here you can view all donations, add a donation or remove a donation.</p>
             </div>
             <form id="my-form" onSubmit={(e) => dataHandler(e)}>
                 <label>Name:{" "}
