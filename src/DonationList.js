@@ -8,7 +8,7 @@ const DonationList = ({list, deleteDonation}) => {
                 <tr key={i}>
                     <td>{donation.name}</td>
                     <td>{donation.type}</td>
-                    <td>{donation.type === "money" ? `$${donation.amount}` : donation.amount}</td>
+                    <td>{donation.type === "Money" ? `$${donation.amount}` : donation.amount}</td>
                     <td>{new Date(donation.date).toDateString()}</td>
                     <td><button onClick={() => deleteDonation(donation, i)}>delete</button></td>
                 </tr>

@@ -5,13 +5,13 @@ import DonationList from "./DonationList";
 
 let storeDonationData = [{
     "name": "Ida G",
-    "type": "money",
+    "type": "Money",
     "amount": 40,
     "date": new Date()
     },
     {
     "name": "Lee",
-    "type": "food",
+    "type": "Food",
     "amount": 40,
     "date": new Date()
     },
@@ -107,10 +107,10 @@ const DonationForm = () => {
                 <label>
                     Type of Donation:{" "}
                     <select defaultValue={type} onChange={(e) => setType(e.target.value)}>
-                        <option value="select">Select</option>
-                        <option value="money">Money</option>
-                        <option value="food">Food</option>
-                        <option value="clothing">Clothing</option>
+                        <option value="Select">Select</option>
+                        <option value="Money">Money</option>
+                        <option value="Food">Food</option>
+                        <option value="Clothing">Clothing</option>
                     </select>
                 </label>{" "}
                 <label>Amount:{" "} 
@@ -126,9 +126,9 @@ const DonationForm = () => {
                         Filter By Type:
                         <select onChange={(e) => filterType(e.target.value)}>
                             <option value="all">View All</option>
-                            <option value="money">Money</option>
-                            <option value="food">Food</option>
-                            <option value="clothing">Clothing</option>
+                            <option value="Money">Money</option>
+                            <option value="Food">Food</option>
+                            <option value="Clothing">Clothing</option>
                         </select>
                     </label>
             </div>
