@@ -5,10 +5,17 @@ import DonationList from "./DonationList";
 
 let storeDonationData = [{
     "name": "Ida G",
-    "type": "Money",
+    "type": "money",
     "amount": 40,
     "date": new Date()
-}]
+    },
+    {
+    "name": "Lee",
+    "type": "food",
+    "amount": 40,
+    "date": new Date()
+    },
+]
 
 const DonationForm = () => {
     const [startDate, setStartDate] = useState(new Date());
@@ -53,18 +60,31 @@ const DonationForm = () => {
 
     const { sumOfAmount, sumOfNumberOfDonations } = calculateDonations()
 
-    // const filterType = (type) => {
-    //     let temp = data
-    //     if (type === "all") {
-    //         setListClicked(true)
-    //         return data
-    //     }
-    //     const filterList = temp.filter((item, index) => item.type !== type)
-    //     console.log(filterList)
-    //     // setData(filterList)
-    //     setdataFilter([filterList])
-    //     setListClicked(true)
-    // }
+    const filterType = (type) => {
+        let temp = data
+        // console.log("type:", type)
+
+        const filterList = temp.filter((item, index) => item.type === type)
+        console.log(filterList)
+        // setData(filterList)
+        setdataFilter(filterList)
+        console.log(dataFilter)
+
+        if (type === "all") {
+            console.log("type all?:", type)
+            setListClicked(false)
+            // return data
+
+        } else {
+            setListClicked(true)
+        }
+    }
+
+    useEffect(() => {
+        console.log("filter:", dataFilter)
+        console.log("clicked all? should be false:", listClicked)
+
+      }, [dataFilter, listClicked, listClicked])
 
     return (
         <>
@@ -93,25 +113,22 @@ const DonationForm = () => {
                 {name && type && amount && startDate ? <input type="submit" value="Submit"/> : <input type="submit" value="Submit" disabled/> }
             </form>
                 <div>
-                {/* <label>
+                <label>
                         Filter By Type:
                         <select onChange={(e) => filterType(e.target.value)}>
+                            <option value="all">View All</option>
                             <option value="money">Money</option>
                             <option value="food">Food</option>
                             <option value="clothing">Clothing</option>
-                            <option value="all">View All</option>
-
                         </select>
-                    </label> */}
+                    </label>
             </div>
             <div>
                 <p>Summary of Donations</p>
                     Number of Donations:{" "} {sumOfNumberOfDonations}{" "}
                     Total Amount:{" "} {sumOfAmount} 
                 </div>
-
-
-                {data.length >= 1 ? <DonationList list={data} deleteDonation={deleteDonation}/> : ""}
+                {listClicked ? <DonationList list={dataFilter} deleteDonation={deleteDonation}/> : <DonationList list={data} deleteDonation={deleteDonation}/>}
         </>
     )
   }
