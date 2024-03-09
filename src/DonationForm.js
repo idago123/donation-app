@@ -16,7 +16,7 @@ let storeDonationData = [{
     "date": new Date()
     },
 ]
-
+// Displays donation form, calculations and list. Contains functions to delete, add, or filter donations.
 const DonationForm = () => {
     const [startDate, setStartDate] = useState(new Date());
     const [name, setName] = useState();
@@ -27,7 +27,6 @@ const DonationForm = () => {
     const [listClicked, setListClicked] = useState(false);
     const [newType, setNewType] = useState("");
 
-
     const dataHandler = (e) => {
         e.preventDefault();
             setData([...data, {
@@ -37,11 +36,6 @@ const DonationForm = () => {
             "date": startDate
             }])
     };
-
-
-    useEffect(() => {
-        console.log("Data:", data)
-      }, [data])
 
     const deleteDonation = (donation, i) => {
         let temp = data
@@ -54,8 +48,6 @@ const DonationForm = () => {
         let sumOfNumberOfDonations = data.length;
         let sumOfNumberOfTypeDonations = dataFilter.length;
         let sumOfNumberOfTypeAmount = 0;
-
-        console.log("list clicked?", listClicked)
 
         for (const donation of data) {
             sumOfAmount =  sumOfAmount + Number(donation.amount);
@@ -78,21 +70,12 @@ const DonationForm = () => {
         setdataFilter(filterList)
 
         if (type === "all") {
-            console.log("type all?:", type)
             setListClicked(false)
         } else {
             setListClicked(true)
         }
         setNewType(type)
-        console.log("filter type ?:", type)
-
     }
-
-    useEffect(() => {
-        console.log("filter:", dataFilter)
-        console.log("clicked all? should be false:", listClicked)
-
-      }, [dataFilter, listClicked, listClicked])
 
     return (
         <>
