@@ -20,7 +20,7 @@ let storeDonationData = [{
 const DonationForm = () => {
     const [startDate, setStartDate] = useState(new Date());
     const [name, setName] = useState();
-    const [type, setType] = useState("money");
+    const [type, setType] = useState();
     const [amount, setAmount] = useState();
     const [data, setData] = useState(storeDonationData);
     const [dataFilter, setdataFilter] = useState(data);
@@ -107,6 +107,7 @@ const DonationForm = () => {
                 <label>
                     Type of Donation:{" "}
                     <select defaultValue={type} onChange={(e) => setType(e.target.value)}>
+                        <option value="select">Select</option>
                         <option value="money">Money</option>
                         <option value="food">Food</option>
                         <option value="clothing">Clothing</option>
