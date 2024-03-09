@@ -25,6 +25,8 @@ const DonationForm = () => {
     const [data, setData] = useState(storeDonationData);
     const [dataFilter, setdataFilter] = useState(data);
     const [listClicked, setListClicked] = useState(false);
+    const [newType, setNewType] = useState("");
+
 
     const dataHandler = (e) => {
         e.preventDefault();
@@ -50,34 +52,40 @@ const DonationForm = () => {
     const calculateDonations = () => {
         let sumOfAmount = 0;
         let sumOfNumberOfDonations = data.length;
+        let sumOfNumberOfTypeDonations = dataFilter.length;
+        let sumOfNumberOfTypeAmount = 0;
+
+        console.log("list clicked?", listClicked)
 
         for (const donation of data) {
             sumOfAmount =  sumOfAmount + Number(donation.amount);
         }
 
-        return { sumOfAmount, sumOfNumberOfDonations }
+        if (listClicked) {
+            for (const donation of dataFilter) {
+                sumOfNumberOfTypeAmount = sumOfNumberOfTypeAmount + Number(donation.amount);
+            }
+
+        }
+        return { sumOfAmount, sumOfNumberOfDonations, sumOfNumberOfTypeDonations, sumOfNumberOfTypeAmount }
     }
 
-    const { sumOfAmount, sumOfNumberOfDonations } = calculateDonations()
+    const { sumOfAmount, sumOfNumberOfDonations, sumOfNumberOfTypeDonations, sumOfNumberOfTypeAmount } = calculateDonations()
 
     const filterType = (type) => {
         let temp = data
-        // console.log("type:", type)
-
         const filterList = temp.filter((item, index) => item.type === type)
-        console.log(filterList)
-        // setData(filterList)
         setdataFilter(filterList)
-        console.log(dataFilter)
 
         if (type === "all") {
             console.log("type all?:", type)
             setListClicked(false)
-            // return data
-
         } else {
             setListClicked(true)
         }
+        setNewType(type)
+        console.log("filter type ?:", type)
+
     }
 
     useEffect(() => {
@@ -124,10 +132,13 @@ const DonationForm = () => {
                     </label>
             </div>
             <div>
-                <p>Summary of Donations</p>
-                    Number of Donations:{" "} {sumOfNumberOfDonations}{" "}
-                    Total Amount:{" "} {sumOfAmount} 
-                </div>
+                <h2>Summary of Donations</h2>
+                    <p>Number of Total Donations:{" "} {sumOfNumberOfDonations}{" "}
+                    Total Amount:{" "} {sumOfAmount} </p>
+                    <p>{listClicked && `Number of ${newType} Donations: ${sumOfNumberOfTypeDonations}
+                    Total ${newType} amount: ${sumOfNumberOfTypeAmount}`}</p>
+            </div>
+
                 {listClicked ? <DonationList list={dataFilter} deleteDonation={deleteDonation}/> : <DonationList list={data} deleteDonation={deleteDonation}/>}
         </>
     )
