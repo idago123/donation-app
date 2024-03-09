@@ -39,9 +39,32 @@ const DonationForm = () => {
 
     const deleteDonation = (donation, i) => {
         let temp = data
+        let tempFilter = dataFilter
+
         const removeItemFromList = temp.filter((item, index) => index !== i)
+
+        if (listClicked) {
+            const removeItemFromFilterList = tempFilter.filter((item, index) => index !== i)
+            setdataFilter(removeItemFromFilterList)
+        }
         setData(removeItemFromList)
     };
+
+    // const deleteDonation = (donation, i) => {
+    //     let temp = data
+    //     let tempFilter = dataFilter
+    //     let filterAll = []
+    //     let match = []
+
+    //     if (listClicked) {
+    //         const removeItemFromFilterList = tempFilter.filter((item, index) => index !== i)
+    //         const matchedDonation = tempFilter.filter((item, index) => index === i)
+    //         setdataFilter(removeItemFromFilterList)
+    //     } 
+
+    //     const removeItemFromList = temp.filter((item, index) => index !== i)
+    //     setData(removeItemFromList)
+    // };
 
     const calculateDonations = () => {
         let sumOfAmount = 0;
