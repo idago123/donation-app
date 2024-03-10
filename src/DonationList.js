@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+// Displays each donation
 const DonationList = ({list, deleteDonation}) => {
 
     let displayDonations = list.map((donation, i) => {
